@@ -1,5 +1,26 @@
 #pomelo-rpc-ws - rpc framework for pomelo
 
+##Installation
+```
+npm install pomelo-rpc-ws
+```
+modify pomelo app.js
+```
+var wsrpc = require('pomelo-rpc-ws');
+app.configure('production|development', function() {
+
+    app.set('proxyConfig', {
+        rpcClient: wsrpc.client
+    });
+
+    app.set('remoteConfig', {
+        rpcServer: wsrpc.server
+    });
+
+});
+```
+
+
 pomelo-rpc-ws is the low level RPC framework for pomelo project. It contains two parts: client and server.
 
 The client part generates the RPC client proxy, routes the message to the appropriate remote server and manages the network communications. Support add proxies and remote server information dynamically.
