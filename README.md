@@ -1,6 +1,6 @@
-#pomelo-rpc - rpc framework for pomelo
+#pomelo-rpc-ws - rpc framework for pomelo
 
-pomelo-rpc is the low level RPC framework for pomelo project. It contains two parts: client and server.
+pomelo-rpc-ws is the low level RPC framework for pomelo project. It contains two parts: client and server.
 
 The client part generates the RPC client proxy, routes the message to the appropriate remote server and manages the network communications. Support add proxies and remote server information dynamically.
 
@@ -12,13 +12,13 @@ And the remote service codes would loaded by pomelo-loader module and more detai
 
 ##Installation
 ```
-npm install pomelo-rpc
+npm install pomelo-rpc-ws
 ```
 
 ##Usage
 ###Server
 ``` javascript
-var Server = require('pomelo-rpc').server;
+var Server = require('pomelo-rpc-ws').server;
 
 // remote service path info list
 var paths = [
@@ -34,7 +34,7 @@ console.log('rpc server started.');
 
 ###Client
 ``` javascript
-var Client = require('pomelo-rpc').client;
+var Client = require('pomelo-rpc-ws').client;
 
 // remote service interface path info list
 var records = [
