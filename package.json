@@ -1,14 +1,15 @@
 {
 	"name": "pomelo-rpc",
-	"version": "0.1.2",
+	"version": "0.3.2",
 	"dependencies": {
-		"socket.io": ">=0.9.4",
-		"crc": ">=0.0.1",
-		"socket.io-client": ">=0.9.4",
-		"pomelo-loader": "0.0.4",
+		"socket.io": "0.9.16",
+		"crc": "0.2.0",
+		"socket.io-client": "0.9.16",
+		"pomelo-loader": "0.0.5",
 		"stream-pkg": "0.0.5",
-		"pomelo-logger": "0.0.2",
-		"toobusy": "0.2.2"
+		"pomelo-logger": "0.1.2",
+		"toobusy": "0.2.2",
+		"node-uuid": "1.4.0"
 	},
 	"devDependencies": {
 		"mocha": ">=0.0.1",

@@ -2,6 +2,7 @@ var lib = process.env.POMELO_RPC_COV ? 'lib-cov' : 'lib';
 var should = require('should');
 var Mailbox = require('../../' + lib + '/rpc-client/mailboxes/ws-mailbox');
 var Server = require('../../').server;
+var Tracer = require('../../lib/util/tracer');
 
 var WAIT_TIME = 100;
 
@@ -26,6 +27,8 @@ var msg = {
   args: [1]
 };
 
+var tracer = new Tracer(console, false); 
+
 describe('ws mailbox test', function() {
   var gateway;
 
@@ -35,7 +38,7 @@ describe('ws mailbox test', function() {
       acceptorFactory: Server.WSAcceptor,
       paths: paths,
       port: port,
-      cacheMsg: true,
+      bufferMsg: true,
       interval: 30
     };
 
@@ -54,7 +57,7 @@ describe('ws mailbox test', function() {
     it('should be ok for creating a mailbox and connect to the right remote server', function(done) {
       var mailbox = Mailbox.create(server);
       should.exist(mailbox);
-      mailbox.connect(function(err) {
+      mailbox.connect(tracer, function(err) {
         should.not.exist(err);
         mailbox.close();
         done();
@@ -70,7 +73,7 @@ describe('ws mailbox test', function() {
 
       var mailbox = Mailbox.create(server);
       should.exist(mailbox);
-      mailbox.connect(function(err) {
+      mailbox.connect(tracer, function(err) {
         should.exist(err);
         done();
       });
@@ -80,10 +83,10 @@ describe('ws mailbox test', function() {
   describe('#send', function() {
     it('should send request to remote server and get the response from callback function', function(done) {
       var mailbox = Mailbox.create(server);
-      mailbox.connect(function(err) {
+      mailbox.connect(tracer, function(err) {
         should.not.exist(err);
 
-        mailbox.send(msg, null, function(err, res) {
+        mailbox.send(tracer, msg, null, function(tracer, err, res) {
           should.exist(res);
           res.should.equal(msg.args[0] + 1);
           mailbox.close();
@@ -118,22 +121,22 @@ describe('ws mailbox test', function() {
       var callbackCount = 0;
 
       var mailbox = Mailbox.create(server);
-      mailbox.connect(function(err) {
+      mailbox.connect(tracer, function(err) {
         should.not.exist(err);
 
-        mailbox.send(msg1, null, function(err, res) {
+        mailbox.send(tracer, msg1, null, function(tracer, err, res) {
           should.exist(res);
           res.should.equal(value + 1);
           callbackCount++;
         });
 
-        mailbox.send(msg2, null, function(err, res) {
+        mailbox.send(tracer, msg2, null, function(tracer, err, res) {
           should.exist(res);
           res.should.equal(value + 2);
           callbackCount++;
         });
 
-        mailbox.send(msg3, null, function(err, res) {
+        mailbox.send(tracer, msg3, null, function(tracer, err, res) {
           should.exist(res);
           res.should.equal(value + 3);
           callbackCount++;
@@ -174,23 +177,23 @@ describe('ws mailbox test', function() {
       };
       var callbackCount = 0;
 
-      var mailbox = Mailbox.create(server, {cacheMsg: true});
-      mailbox.connect(function(err) {
+      var mailbox = Mailbox.create(server, {bufferMsg: true});
+      mailbox.connect(tracer, function(err) {
         should.not.exist(err);
 
-        mailbox.send(msg1, null, function(err, res) {
+        mailbox.send(tracer, msg1, null, function(tracer, err, res) {
           should.exist(res);
           res.should.equal(value + 1);
           callbackCount++;
         });
 
-        mailbox.send(msg2, null, function(err, res) {
+        mailbox.send(tracer, msg2, null, function(tracer, err, res) {
           should.exist(res);
           res.should.equal(value + 2);
           callbackCount++;
         });
 
-        mailbox.send(msg3, null, function(err, res) {
+        mailbox.send(tracer, msg3, null, function(tracer, err, res) {
           should.exist(res);
           res.should.equal(value + 3);
           callbackCount++;
@@ -240,23 +243,23 @@ describe('ws mailbox test', function() {
       };
       var callbackCount = 0;
 
-      var mailbox = Mailbox.create(server, {cacheMsg: true});
-      mailbox.connect(function(err) {
+      var mailbox = Mailbox.create(server, {bufferMsg: true});
+      mailbox.connect(tracer, function(err) {
         should.not.exist(err);
 
-        mailbox.send(msg1, null, function(err, res) {
+        mailbox.send(tracer, msg1, null, function(tracer, err, res) {
           should.exist(res);
           res.should.equal(value + 1);
           callbackCount++;
         });
 
-        mailbox.send(msg2, null, function(err, res) {
+        mailbox.send(tracer, msg2, null, function(tracer, err, res) {
           should.exist(res);
           res.should.equal(value + 2);
           callbackCount++;
         });
 
-        mailbox.send(msg3, null, function(err, res) {
+        mailbox.send(tracer, msg3, null, function(tracer, err, res) {
           should.exist(res);
           res.should.equal(value + 3);
           callbackCount++;
@@ -278,7 +281,7 @@ describe('ws mailbox test', function() {
     it('should emit a close event when mailbox close', function(done) {
       var closeEventCount = 0;
       var mailbox = Mailbox.create(server);
-      mailbox.connect(function(err) {
+      mailbox.connect(tracer, function(err) {
         should.not.exist(err);
         mailbox.on('close', function() {
           closeEventCount++;
@@ -294,10 +297,10 @@ describe('ws mailbox test', function() {
 
     it('should return an error when try to send message by a closed mailbox', function(done) {
       var mailbox = Mailbox.create(server);
-      mailbox.connect(function(err) {
+      mailbox.connect(tracer, function(err) {
         should.not.exist(err);
         mailbox.close();
-        mailbox.send(msg, null, function(err, res) {
+        mailbox.send(tracer, msg, null, function(tracer, err, res) {
           should.exist(err);
           done();
         });
