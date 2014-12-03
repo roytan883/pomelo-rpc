@@ -1,6 +1,6 @@
 {
 	"name": "pomelo-rpc-ws",
-	"version": "0.4.6",
+	"version": "0.4.7",
   "description": "pure websocket rpc framework for pomelo",
   "main": "index.js",
   "repository": {
