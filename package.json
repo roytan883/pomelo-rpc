@@ -1,6 +1,6 @@
 {
 	"name": "pomelo-rpc-ws",
-	"version": "0.4.7",
+	"version": "0.4.8",
   "description": "pure websocket rpc framework for pomelo",
   "main": "index.js",
   "repository": {
@@ -8,11 +8,10 @@
     "url": "https://github.com/roytan883/pomelo-rpc-ws.git"
   },
 	"dependencies": {
-		"ws": "0.4.32",
+		"ws": "0.7.1",
 		"crc": "3.0.0",
-		"pomelo-loader": "0.0.6",
-		"pomelo-logger": "0.1.7",
-		"node-uuid": "1.4.1",
-		"async": "0.9.0"
+		"pomelo-loader": ">=0.0.6",
+		"pomelo-logger": ">=0.1.6",
+		"node-uuid": "1.4.1"
 	}
 }
