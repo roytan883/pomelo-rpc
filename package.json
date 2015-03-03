@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
 	"name": "pomelo-rpc-ws",
 	"version": "0.4.8",
   "description": "pure websocket rpc framework for pomelo",
@@ -7,6 +8,10 @@
     "type": "git",
     "url": "https://github.com/roytan883/pomelo-rpc-ws.git"
   },
+=======
+	"name": "pomelo-rpc",
+	"version": "0.4.7",
+>>>>>>> remotes/163/master
 	"dependencies": {
 		"ws": "0.7.1",
 		"crc": "3.0.0",
