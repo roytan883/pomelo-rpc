@@ -1,6 +1,6 @@
 {
   "name": "pomelo-rpc-ws",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "pure websocket rpc framework for pomelo, based on pomelo-rpc, modified by roytan",
   "main": "index.js",
   "repository": {
@@ -8,7 +8,7 @@
     "url": "https://github.com/roytan883/pomelo-rpc-ws.git"
   },
   "dependencies": {
-    "ws": "0.5.0",
+    "ws": "1.0.1",
     "crc": "3.0.0",
     "pomelo-loader": "0.0.6",
 	"stream-pkg": "0.0.5",
